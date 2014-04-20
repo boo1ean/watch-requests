@@ -24,7 +24,11 @@ var prepareData = function(data) {
 	return data;
 };
 
-var toggleInfo = function() {
+var toggleInfo = function(e) {
+	if ('TD' === e.target.tagName) {
+		return;
+	}
+
 	var info = this.querySelector('.info');
 
 	if (info.style.display != 'block') {
@@ -38,7 +42,7 @@ module.exports = {
 	append: function(req) {
 		var view = document.createElement('div');
 		view.innerHTML = templates['request'](prepareData(req));
-		view.addEventListener('click', toggleInfo);
+		view.addEventListener('mousedown', toggleInfo);
 		root.insertBefore(view, root.firstChild);
 	}
 };
