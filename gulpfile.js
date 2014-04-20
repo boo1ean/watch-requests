@@ -51,9 +51,7 @@ gulp.task('css-optimized', function() {
 });
 
 gulp.task('watch', function() {
-	gulp.watch('./dashboard/**/*.js', ['js']);
-	gulp.watch('./dashboard/**/*.css', ['css']);
-	gulp.watch('./dashboard/**/*.html', ['templates', 'js']);
+	gulp.watch('./dashboard/**/*.*', ['templates', 'js']);
 });
 
 gulp.task('build', ['templates', 'js-uglify', 'css-optimized']);
