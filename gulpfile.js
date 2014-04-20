@@ -8,19 +8,26 @@ var uncss = require('gulp-uncss');
 var uglify = require('gulp-uglify');
 var minifyCss = require('gulp-minify-css');
 
+var config = {
+	staticPath: './static',
+	jsApp: ['./dashboard/app.js'],
+	css: ['./dashboard/styles/main.css', './vendor/Metro-UI-CSS/css/metro-bootstrap.css'],
+	distCss: 'main.css'
+};
+
 gulp.task('js', function() {
-	gulp.src('./dashboard/app.js')
+	gulp.src(config.jsApp)
 		.pipe(plumber())
 		.pipe(browserify())
-		.pipe(gulp.dest('./static'));
+		.pipe(gulp.dest(config.staticPath));
 });
 
 gulp.task('js-uglify', function() {
-	gulp.src('./dashboard/app.js')
+	gulp.src(config.jsApp)
 		.pipe(plumber())
 		.pipe(browserify())
 		.pipe(uglify())
-		.pipe(gulp.dest('./static'));
+		.pipe(gulp.dest(config.staticPath));
 });
 
 gulp.task('templates', function() {
@@ -35,19 +42,19 @@ gulp.task('templates', function() {
 })
 
 gulp.task('css', function() {
-	gulp.src(['./dashboard/styles/main.css', './vendor/Metro-UI-CSS/css/metro-bootstrap.css'])
-		.pipe(concat('main.css'))
-		.pipe(gulp.dest('./static'));
+	gulp.src(config.css)
+		.pipe(concat(config.distCss))
+		.pipe(gulp.dest(config.staticPath));
 });
 
 gulp.task('css-optimized', function() {
-	gulp.src(['./dashboard/styles/main.css', './vendor/Metro-UI-CSS/css/metro-bootstrap.css'])
-		.pipe(concat('main.css'))
+	gulp.src(config.css)
+		.pipe(concat(config.distCss))
 		.pipe(uncss({
 			html: ['./stuff/rendered.html']
 		}))
 		.pipe(minifyCss())
-		.pipe(gulp.dest('./static'));
+		.pipe(gulp.dest(config.staticPath));
 });
 
 gulp.task('watch', function() {
