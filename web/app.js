@@ -12,14 +12,20 @@ var io = socketio.listen(server);
 var index = resolve(__dirname + '/views/index.html');
 var dashboard = resolve(__dirname + '/views/dashboard.html');
 var props = ['headers', 'path', 'body', 'query', 'method'];
+var nginxHeaders = ['x-real-ip', 'x-forwarded-for', 'x-nginx-proxy'];
 
 app.use(bodyParser());
 app.use(express.static(__dirname + '/../static'));
 
 var payload = function(req) {
 	var result = _.pick(req, props);
+
+	// Use nginx header or default remoteaddress
 	result.ip = req.headers['x-forwarded-for'] || req.connection.remoteAddress
 	result.time = new Date().getTime();
+	
+	// Omit nginx stuff
+	result.headers = _.omit(result.headers, nginxHeaders);
 	return result;
 };
 
