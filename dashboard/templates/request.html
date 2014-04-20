@@ -1,3 +1,16 @@
 <div class="req">
-	THIS IS REQUEST REALLY
+	<table class="headers">
+		<tbody>
+			{{~ it.headers :header}}
+			<tr>
+				<td>
+			{{= header.name }}
+				</td>
+				<td>
+					{{= header.value }}
+				</td>
+			</tr>
+			{{~}}
+		</tbody>
+	</div>
 </div>
