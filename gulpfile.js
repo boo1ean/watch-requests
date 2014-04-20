@@ -20,5 +20,9 @@ gulp.task('templates', function() {
 		.pipe(gulp.dest('./dashboard'));
 })
 
+gulp.task('watch', function() {
+	gulp.watch('./dashboard/**/*.*', ['build']);
+});
+
 gulp.task('build', ['templates', 'js']);
 gulp.task('default', ['build']);
