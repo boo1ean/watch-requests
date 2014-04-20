@@ -3,5 +3,24 @@
 		<span class="list-title">{{= it.method }}</span>
 		<span class="list-subtitle">{{= it.ip }}</span>
 		<span class="list-remark">{{= it.time }}</span>
+
+		<div class="info">
+			<br/>
+			<h3>Headers</h3>
+			<table class="headers table .striped hovered">
+				<tbody>
+					{{~ it.headers :header}}
+					<tr>
+						<td>
+					{{= header.name }}
+						</td>
+						<td>
+							{{= header.value }}
+						</td>
+					</tr>
+					{{~}}
+				</tbody>
+			</table>
+		</div>
 	</div>
 </div>
