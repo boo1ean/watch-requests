@@ -17,7 +17,7 @@ var listify = function(obj) {
 
 var prepareData = function(data) {
 	data.headers = listify(data.headers);
-	data.params = listify(data.params);
+	data.body = listify(data.body);
 	data.query = listify(data.query);
 	data.time = new Date(data.time);
 

@@ -22,17 +22,17 @@
 				</tbody>
 			</table>
 
-			{{? it.params.length }}
-			<h3>Params</h3>
+			{{? it.body.length }}
+			<h3>Body</h3>
 			<table class="headers table .striped hovered">
 				<tbody>
-					{{~ it.params :header}}
+					{{~ it.body :param}}
 					<tr>
 						<td>
-							{{= params.name }}
+							{{= param.name }}
 						</td>
 						<td>
-							{{= params.value }}
+							{{= param.value }}
 						</td>
 					</tr>
 					{{~}}
@@ -44,13 +44,13 @@
 			<h3>Query</h3>
 			<table class="headers table .striped hovered">
 				<tbody>
-					{{~ it.query :header}}
+					{{~ it.query :param}}
 					<tr>
 						<td>
-							{{= query.name }}
+							{{= param.name }}
 						</td>
 						<td>
-							{{= query.value }}
+							{{= param.value }}
 						</td>
 					</tr>
 					{{~}}
