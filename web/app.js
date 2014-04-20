@@ -1,7 +1,7 @@
 var express = require('express');
 var socketio = require('socket.io');
 var http = require('http');
-var path = require('path');
+var resolve = require('path').resolve;
 var _ = require('lodash');
 var bodyParser = require('body-parser');
 
@@ -9,7 +9,8 @@ var port = 5000;
 var app = express();
 var server = http.createServer(app).listen(port)
 var io = socketio.listen(server);
-var html = path.resolve(__dirname + '/views/index.html');
+var index = resolve(__dirname + '/views/index.html');
+var dashboard = resolve(__dirname + '/views/dashboard.html');
 var props = ['headers', 'path', 'body', 'query', 'method'];
 
 app.use(bodyParser());
@@ -22,9 +23,13 @@ var payload = function(req) {
 	return result;
 };
 
+app.get('/', function(req, res) {
+	res.sendfile(index);
+});
+
 app.all('*', function(req, res) {
 	io.sockets.in(req.path).emit('request', payload(req));
-	res.sendfile(html);
+	res.sendfile(dashboard);
 });
 
 io.sockets.on('connection', function(socket) {
