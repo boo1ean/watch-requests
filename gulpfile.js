@@ -23,9 +23,15 @@ gulp.task('templates', function() {
 		.pipe(gulp.dest('./dashboard'));
 })
 
+gulp.task('css', function() {
+	gulp.src('./dashboard/styles/main.css')
+		.pipe(concat('main.css'))
+		.pipe(gulp.dest('./static'));
+});
+
 gulp.task('watch', function() {
 	gulp.watch('./dashboard/**/*.*', ['build']);
 });
 
-gulp.task('build', ['templates', 'js']);
+gulp.task('build', ['templates', 'js', 'css']);
 gulp.task('default', ['build']);
