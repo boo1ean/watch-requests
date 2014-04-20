@@ -1,18 +1,20 @@
 var express = require('express');
-var ecstatic = require('ecstatic');
+var socketio = require('socket.io');
+var http = require('http');
+var path = require('path');
 
 var port = 5000;
 var app = express();
+var server = http.createServer(app).listen(port)
+var io = socketio.listen(server);
+var html = path.resolve(__dirname + '/views/index.html');
 
-var staticOptions = {
-	root: __dirname + '/../static',
-	showDir: false
-};
-
-app.use(ecstatic(staticOptions));
+app.use(express.static(__dirname + '/../static'));
 
 app.all('*', function(req, res) {
-	res.sendfile(__dirname + '/views/index.html');
+	res.sendfile(html);
 });
 
-app.listen(port);
+io.sockets.on('connection', function(socket) {
+	socket.emit('news', { hello: 'world' });
+});
