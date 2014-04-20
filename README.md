@@ -1,3 +1,3 @@
-## watch-requests
+## Watch your requests
 
-Watch your http requests for different debugging purposes.
+Simple web interface for watching http requests
