@@ -1,0 +1,15 @@
+#!/usr/bin/env bash
+
+URL=$1
+
+while 1
+do
+	curl -X POST $URL
+	sleep 5
+	curl -X GET $URL
+	sleep 5
+	curl -X PUT $URL
+	sleep 5
+	curl -X DELETE $URL
+	sleep 5
+done
