@@ -4,11 +4,11 @@ URL=$1
 
 while true
 do
-	curl -X POST $URL
+	curl -X POST -d 'email=default@example.com&password=muchsecure' $URL
 	sleep 7
 	curl -X GET $URL
 	sleep 7
-	curl -X PUT $URL
+	curl -X PUT -d 'text=I am little PUT' $URL
 	sleep 7
 	curl -X DELETE $URL
 	sleep 7
