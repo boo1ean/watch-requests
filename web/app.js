@@ -10,13 +10,20 @@ var app = express();
 var server = http.createServer(app).listen(port)
 var io = socketio.listen(server);
 var html = path.resolve(__dirname + '/views/index.html');
+var props = ['headers', 'path', 'body', 'query', 'method'];
 
 app.use(bodyParser());
 app.use(express.static(__dirname + '/../static'));
 
+var payload = function(req) {
+	var result = _.pick(req, props);
+	result.ip = req.headers['x-forwarded-for'] || req.connection.remoteAddress
+	result.time = new Date().getTime();
+	return result;
+};
+
 app.all('*', function(req, res) {
-	var payload = _.pick(req, ['headers', 'path', 'body', 'query']);
-	io.sockets.in(req.path).emit('request', payload);
+	io.sockets.in(req.path).emit('request', payload(req));
 	res.sendfile(html);
 });
 
