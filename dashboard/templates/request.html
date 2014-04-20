@@ -12,7 +12,7 @@
 					{{~ it.headers :header}}
 					<tr>
 						<td>
-					{{= header.name }}
+							{{= header.name }}
 						</td>
 						<td>
 							{{= header.value }}
@@ -21,6 +21,42 @@
 					{{~}}
 				</tbody>
 			</table>
+
+			{{? it.params.length }}
+			<h3>Params</h3>
+			<table class="headers table .striped hovered">
+				<tbody>
+					{{~ it.params :header}}
+					<tr>
+						<td>
+							{{= params.name }}
+						</td>
+						<td>
+							{{= params.value }}
+						</td>
+					</tr>
+					{{~}}
+				</tbody>
+			</table>
+			{{?}}
+
+			{{? it.query.length }}
+			<h3>Query</h3>
+			<table class="headers table .striped hovered">
+				<tbody>
+					{{~ it.query :header}}
+					<tr>
+						<td>
+							{{= query.name }}
+						</td>
+						<td>
+							{{= query.value }}
+						</td>
+					</tr>
+					{{~}}
+				</tbody>
+			</table>
+			{{?}}
 		</div>
 	</div>
 </div>

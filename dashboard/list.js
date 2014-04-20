@@ -2,17 +2,23 @@ var templates = require('./templates');
 
 var root = document.getElementById('main');
 
-var prepareData = function(data) {
-	var headers = [];
+var listify = function(obj) {
+	var result = [];
 
-	for (var name in data.headers) {
-		headers.push({
+	for (var name in obj) {
+		result.push({
 			name: name,
-			value: data.headers[name]
+			value: obj[name]
 		});
 	}
 
-	data.headers = headers;
+	return result;
+};
+
+var prepareData = function(data) {
+	data.headers = listify(data.headers);
+	data.params = listify(data.params);
+	data.query = listify(data.query);
 	data.time = new Date(data.time);
 
 	return data;
