@@ -4,6 +4,7 @@ var dotify = require('gulp-dotify');
 var concat = require('gulp-concat');
 var header = require('gulp-header');
 var plumber = require('gulp-plumber');
+var uncss = require('gulp-uncss');
 
 gulp.task('js', function() {
 	gulp.src('./dashboard/app.js')
@@ -26,6 +27,9 @@ gulp.task('templates', function() {
 gulp.task('css', function() {
 	gulp.src(['./dashboard/styles/main.css', './vendor/Metro-UI-CSS/css/metro-bootstrap.css'])
 		.pipe(concat('main.css'))
+		.pipe(uncss({
+			html: ['./stuff/rendered.html']
+		}))
 		.pipe(gulp.dest('./static'));
 });
 
