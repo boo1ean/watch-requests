@@ -30,7 +30,9 @@ gulp.task('css', function() {
 });
 
 gulp.task('watch', function() {
-	gulp.watch('./dashboard/**/*.*', ['build']);
+	gulp.watch('./dashboard/**/*.js', ['js']);
+	gulp.watch('./dashboard/**/*.css', ['css']);
+	gulp.watch('./dashboard/**/*.html', ['templates', 'js']);
 });
 
 gulp.task('build', ['templates', 'js', 'css']);
