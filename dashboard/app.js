@@ -4,7 +4,9 @@ var list = require('./list');
 var waiting = document.getElementById('waiting');
 var url = document.getElementById('url');
 
-url.href = url.innerHTML = window.location.href;
+if (url) {
+	url.href = url.innerHTML = window.location.href;
+}
 
 var socket = io.connect('/');
 
@@ -13,6 +15,9 @@ socket.emit('subscribe', {
 });
 
 socket.on('request', function(req) {
-	waiting.style.display = 'none';
+	if (waiting) {
+		waiting.style.display = 'none';
+	}
+
 	list.append(req);
 });
