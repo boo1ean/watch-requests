@@ -44,3 +44,8 @@ io.sockets.on('connection', function(socket) {
 		socket.join(data.room);
 	})
 });
+
+process.on('uncaughtException', function(e) {
+	console.log('Nooooooooooooooo!', e);
+	process.exit();
+});
