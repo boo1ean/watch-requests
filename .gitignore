@@ -1,3 +1,4 @@
 node_modules
 static/app.js
 dashboard/templates.js
+vendor

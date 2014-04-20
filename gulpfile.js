@@ -24,7 +24,7 @@ gulp.task('templates', function() {
 })
 
 gulp.task('css', function() {
-	gulp.src('./dashboard/styles/main.css')
+	gulp.src(['./dashboard/styles/main.css', './vendor/Metro-UI-CSS/css/metro-bootstrap.css'])
 		.pipe(concat('main.css'))
 		.pipe(gulp.dest('./static'));
 });
