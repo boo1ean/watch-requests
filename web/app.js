@@ -1,12 +1,18 @@
-var http = require('http');
+var express = require('express');
+var ecstatic = require('ecstatic');
 
 var port = 5000;
+var app = express();
 
-var handler = function(req, res) {
-  res.writeHead(200, {'Content-Type': 'text/plain'});
-  res.end('okay');
+var staticOptions = {
+	root: __dirname + '/../static',
+	showDir: false
 };
 
-var server = http.createServer(handler);
+app.use(ecstatic(staticOptions));
 
-server.listen(port);
+app.all('*', function(req, res) {
+	res.sendfile(__dirname + '/views/index.html');
+});
+
+app.listen(port);
