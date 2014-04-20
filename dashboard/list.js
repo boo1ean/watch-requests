@@ -1,5 +1,4 @@
 var templates = require('./templates');
-var moment = require('moment');
 
 var root = document.getElementById('main');
 
@@ -14,7 +13,7 @@ var prepareData = function(data) {
 	}
 
 	data.headers = headers;
-	data.time = moment(data.time).format();
+	data.time = new Date(data.time);
 
 	return data;
 };
