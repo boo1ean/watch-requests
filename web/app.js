@@ -23,13 +23,14 @@ var payload = function(req) {
 	return result;
 };
 
-app.get('/', function(req, res) {
-	res.sendfile(index);
-});
-
 app.all('*', function(req, res) {
 	io.sockets.in(req.path).emit('request', payload(req));
-	res.sendfile(dashboard);
+
+	if (req.path === '/') {
+		res.sendfile(index);
+	} else {
+		res.sendfile(dashboard);
+	}
 });
 
 io.sockets.on('connection', function(socket) {
